@@ -77,7 +77,7 @@
                     <div class="d-flex justify-content-between py-3 border-bottom profile-text">
                         <span class="profile-label">Mobile</span>
                         <span class="profile-value">
-                            {{ $user->mobile ?? 'Not Provided' }}
+                            {{ $user->phone ?? 'Not Provided' }}
                         </span>
                     </div>
 
