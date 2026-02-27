@@ -8,6 +8,8 @@ use App\Models\Booking;
 use App\Models\Contact;
 use App\Models\Gallary;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -60,49 +62,58 @@ class HomeController extends Controller
     }
 
 
- 
+
 
     public function contact(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:255',
-        'email' => 'required|email',
-        'phone' => 'required',
-        'message' => 'required'
-    ]);
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required'
+        ]);
 
-    if ($validator->fails()) {
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
+
+        Contact::create($request->all());
+
         return response()->json([
-            'status' => false,
-            'errors' => $validator->errors()
+            'status' => true,
+            'message' => 'Message sent successfully!'
         ]);
     }
 
-    Contact::create($request->all());
 
-    return response()->json([
-        'status' => true,
-        'message' => 'Message sent successfully!'
-    ]);
+    public function our_rooms()
+    {
+
+        $rooms = Room::all();
+
+        return view('home.our_rooms', compact('rooms'));
+    }
+
+    public function hotel_gallary()
+    {
+
+        $gallary = Gallary::all();
+
+        return view('home.hotel_gallary', compact('gallary'));
+    }
+
+    public function contact_us()
+    {
+        return view('home.contact_us');
+    }
+
+    public function show()
+{
+    $user = Auth::user();
+
+    return view('home.show', compact('user'));
 }
-
-
-public function our_rooms(){
-
-    $rooms = Room::all();
-
-    return view('home.our_rooms',compact('rooms'));
-}
-
-public function hotel_gallary(){
-
-    $gallary = Gallary::all();
-
-    return view('home.hotel_gallary',compact('gallary'));
-}
-
-public function contact_us(){
-    return view('home.contact_us');
-}
-
 }

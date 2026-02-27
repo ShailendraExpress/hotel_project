@@ -70,7 +70,7 @@
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                            <li>
-                              <a class="dropdown-item" href="{{ route('profile.show') }}">
+                              <a class="dropdown-item" href="{{ url ('profile') }}">
                                  Profile
                               </a>
                            </li>

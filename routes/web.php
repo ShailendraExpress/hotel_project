@@ -50,3 +50,4 @@ Route::post('/contact',[HomeController::class,'contact'])->name('contact.submit'
 Route::get('/our_rooms',[HomeController::class,'our_rooms'])->name('our_rooms');
 Route::get('/hotel_gallary',[HomeController::class,'hotel_gallary'])->name('hotel_gallary');
 Route::get('/contact_us',[HomeController::class,'contact_us'])->name('contact_us');
+Route::get('/profile', [HomeController::class, 'show']);
